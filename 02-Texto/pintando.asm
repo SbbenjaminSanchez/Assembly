@@ -2,6 +2,14 @@
 ;DESARROLLADO POR BENJAMIN SANCHEZ BALLEJO | 15/08/2019 10:01am
 ;=====================================================================
 
+;=====================================================================
+;PARA COMPILAR EL PROGRAMA
+;1)	\masm32\bin\ml /c /coff "main.asm"
+;2)	\masm32\bin\PoLink /SUBSYSTEM:CONSOLE "main.obj"
+;2)	\masm32\bin\PoLink /SUBSYSTEM:WINDOWS "main.obj"
+
+;====================================================================
+
 ;Directivas
 .386
 option casemap	:none	;Diferencia mayusculas de minusculas

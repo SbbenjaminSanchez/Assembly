@@ -8,7 +8,6 @@
 ;2)	\masm32\bin\PoLink /SUBSYSTEM:CONSOLE "main.obj"
 ;2)	\masm32\bin\PoLink /SUBSYSTEM:WINDOWS "main.obj"
 
-;link: https://www.youtube.com/watch?v=qCaLX0DchUk
 ;====================================================================
 
 
