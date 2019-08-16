@@ -4,9 +4,8 @@
 
 ;=====================================================================
 ;PARA COMPILAR EL PROGRAMA
-;1)	\masm32\bin\ml /c /coff "main.asm"
-;2)	\masm32\bin\PoLink /SUBSYSTEM:CONSOLE "main.obj"
-;2)	\masm32\bin\PoLink /SUBSYSTEM:WINDOWS "main.obj"
+;1)	\masm32\bin\ml /c /coff "fuentes.asm"
+;2)	\masm32\bin\PoLink /SUBSYSTEM:WINDOWS "fuentes.obj"
 
 ;====================================================================
 
