@@ -5,7 +5,7 @@
 ;=====================================================================
 ;PARA COMPILAR EL PROGRAMA
 ;1)	\masm32\bin\ml /c /coff "main.asm"
-;2)	\masm32\bin\PoLink /SUBSYSTEM:WINDOWS "main.obj"
+;2)	\masm32\bin\PoLink /SUBSYSTEM:CONSOLE "main.obj"
 
 ;====================================================================
 
@@ -25,6 +25,7 @@ mensaje db "Hola Mundo!", 0
 
     .CODE
 start:
+
     invoke StdOut, addr mensaje
     invoke ExitProcess, 0
 
