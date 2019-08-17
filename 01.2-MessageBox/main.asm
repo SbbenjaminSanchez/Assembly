@@ -1,5 +1,5 @@
 ;=====================================================================
-;DESARROLLADO POR BENJAMIN SANCHEZ | 15/08/2019 
+;DESARROLLADO POR BENJAMIN SANCHEZ | 17/08/2019 
 ;=====================================================================
 
 ;=====================================================================
@@ -24,6 +24,8 @@ Mensaje db "El mensaje" ,0
 
     .CODE
 start:
+    ;                  NULL para indicar la instancia padre, en este cado ninguna!
+    ;                                                   MB_OK para indicar le tipo de boton
     invoke MessageBox, NULL, addr Mensaje, addr Titulo, MB_OK
     invoke ExitProcess, 0
 
