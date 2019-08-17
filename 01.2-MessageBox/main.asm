@@ -5,7 +5,7 @@
 ;=====================================================================
 ;PARA COMPILAR EL PROGRAMA
 ;1)	\masm32\bin\ml /c /coff "main.asm"
-;2)	\masm32\bin\PoLink /SUBSYSTEM:CONSOLE "main.obj"
+;2)	\masm32\bin\PoLink /SUBSYSTEM:WINDOWS "main.obj"
 
 ;====================================================================
 
@@ -19,14 +19,12 @@ includelib \masm32\lib\kernel32.lib
 includelib \masm32\lib\masm32.lib
 
     .DATA
-mensaje db "Hola Mundo!", 0
+Titulo db "El titulo"    ,0
+Mensaje db "El mensaje" ,0
 
     .CODE
 start:
-
-    mensaje db "Hola!"
-
-    invoke StdOut, addr mensaje
+    invoke MessageBox, NULL, addr Mensaje, addr Titulo, MB_OK
     invoke ExitProcess, 0
 
 end start
