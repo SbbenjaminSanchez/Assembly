@@ -6,38 +6,72 @@ Capítulo V: EL LENGUAJE ENSAMBLADOR DEL 80x86
 
 
 
-     Hasta ahora hemos visto los mnemónicos de las instrucciones que pasadas a su correspondiente código binario ya puede entender el microprocesador. Si bien se realiza un gran avance al introducir los mnemónicos respecto a programar directamente en lenguaje maquina -es decir, con números en binario o hexadecimal- aún resultaría tedioso tener que realizar los cálculos de los desplazamientos en los saltos a otras partes del programa en las transferencias de control, reservar espacio de memoria dentro de un programa para almacenar datos, etc... Para facilitar estas operaciones se utilizan las directivas que indican al ensamblador qué debe hacer con las instrucciones y los datos.
+     Hasta ahora hemos visto los mnemónicos de las instrucciones que pasadas a su correspondiente código binario ya puede entender el 
+     microprocesador. Si bien se realiza un gran avance al introducir los mnemónicos respecto a programar directamente en lenguaje 
+     maquina -es decir, con números en binario o hexadecimal- aún resultaría tedioso tener que realizar los cálculos de los desplazamientos 
+     en los saltos a otras partes del programa en las transferencias de control, reservar espacio de memoria dentro de un programa 
+     para almacenar datos, etc... Para facilitar estas operaciones se utilizan las directivas que indican al ensamblador qué debe hacer 
+     con las instrucciones y los datos.
 
-     Los programas de ejemplo de este libro y la sintaxis de ensamblador tratada son las del MASM de Microsoft y el ensamblador de IBM. No obstante, todos los programas han sido desarrollados con el Turbo Assembler 2.0 de Borland (TASM), compatible con el clásico MASM 5.0 de Microsoft pero más potente y al mismo tiempo mucho más rápido y flexible. TASM genera además un código más reducido y optimizado. Por otra parte, MASM 5.0 no permite cambiar (aunque sí la 6.0) dentro de un segmento el modo del procesador: esto conlleva el riesgo de ejecutar indeseadamente instrucciones de 32 bits al no poder acotar exactamente las líneas donde se desea emplearlas, algo vital para mantener la compatibilidad con procesadores anteriores. También es propenso a generar errores de fase y otros similares al tratar con listados un poco grandes. Respecto a MASM 6.0, el autor de este libro encontró que en ocasiones calcula incorrectamente el valor de algunos símbolos y etiquetas, aunque es probable que la versión 6.1 (aparecida sospechosa e inusualmente muy poco tiempo después) haya corregido dichos fallos, intolerables en un ensamblador. Por otro lado, las posibilidades adicionales de TASM no han sido empleadas por lo general. Muchos programas han sido ensamblados una vez con MASM, para asegurar que éste puede ensamblarlos.
+     Los programas de ejemplo de este libro y la sintaxis de ensamblador tratada son las del MASM de Microsoft y el ensamblador de IBM. 
+     No obstante, todos los programas han sido desarrollados con el Turbo Assembler 2.0 de Borland (TASM), compatible con el clásico 
+     MASM 5.0 de Microsoft pero más potente y al mismo tiempo mucho más rápido y flexible. TASM genera además un código más reducido y 
+     optimizado. Por otra parte, MASM 5.0 no permite cambiar (aunque sí la 6.0) dentro de un segmento el modo del procesador: esto 
+     conlleva el riesgo de ejecutar indeseadamente instrucciones de 32 bits al no poder acotar exactamente las líneas donde se desea 
+     emplearlas, algo vital para mantener la compatibilidad con procesadores anteriores. También es propenso a generar errores de fase 
+     y otros similares al tratar con listados un poco grandes. Respecto a MASM 6.0, el autor de este libro encontró que en ocasiones 
+     calcula incorrectamente el valor de algunos símbolos y etiquetas, aunque es probable que la versión 6.1 (aparecida sospechosa e 
+     inusualmente muy poco tiempo después) haya corregido dichos fallos, intolerables en un ensamblador. Por otro lado, las posibilidades 
+     adicionales de TASM no han sido empleadas por lo general. Muchos programas han sido ensamblados una vez con MASM, para asegurar 
+     que éste puede ensamblarlos.
 
-     Conviene decir aquí que este capítulo es especialmente arduo para aquellos que no conocen el lenguaje ensamblador de ninguna máquina. La razón es que la información está organizada a modo de referencia, por lo que con frecuencia se utilizan unos elementos -para explicar otros- que aún no han sido definidos. Ello por otra parte resulta inevitable también en algunos libros más básicos, debido a la complejidad de la sintaxis del lenguaje ensamblador ideada por el fabricante (que no la del microprocesador). Por ello, es un buen consejo actuar a dos pasadas, al igual que el propio ensamblador en ocasiones: leer todo una vez primero -aunque no se entienda del todo- y volverlo a leer después más despacio.
+     Conviene decir aquí que este capítulo es especialmente arduo para aquellos que no conocen el lenguaje ensamblador de ninguna máquina. 
+     La razón es que la información está organizada a modo de referencia, por lo que con frecuencia se utilizan unos elementos -para explicar 
+     otros- que aún no han sido definidos. Ello por otra parte resulta inevitable también en algunos libros más básicos, debido a la 
+     complejidad de la sintaxis del lenguaje ensamblador ideada por el fabricante (que no la del microprocesador). Por ello, es un buen 
+     consejo actuar a dos pasadas, al igual que el propio ensamblador en ocasiones: leer todo una vez primero -aunque no se entienda del 
+     todo- y volverlo a leer después más despacio.
 
 
 5.1. - SINTAXIS DE UNA LÍNEA EN ENSAMBLADOR.
 
-     Un programa fuente en ensamblador contiene dos tipos de sentencias: las instrucciones y las directivas. Las instrucciones se aplican en tiempo de ejecución, pero las directivas sólo son utilizadas durante el ensamblaje. El formato de una sentencia de instrucción es el siguiente:
+     Un programa fuente en ensamblador contiene dos tipos de sentencias: las instrucciones y las directivas. Las instrucciones se 
+     aplican en tiempo de ejecución, pero las directivas sólo son utilizadas durante el ensamblaje. El formato de una sentencia de 
+     instrucción es el siguiente:
 
 [etiqueta]  nombre_instrucción  [operandos]  [comentario]
 
-     Los corchetes, como es normal al explicar instrucciones en informática, indican que lo especificado entre ellos es opcional, dependiendo de la situación que se trate.
+     Los corchetes, como es normal al explicar instrucciones en informática, indican que lo especificado entre ellos es opcional, 
+     dependiendo de la situación que se trate.
 
-          Campo de etiqueta. Es el nombre simbólico de la primera posición de una instrucción, puntero o dato. Consta de hasta 31 caracteres que pueden ser las letras de la A a la Z, los números del 0 al 9 y algunos caracteres especiales como «@», «_», «.» y «$». Reglas:
+          Campo de etiqueta. Es el nombre simbólico de la primera posición de una instrucción, puntero o dato. Consta de hasta 31 
+          caracteres que pueden ser las letras de la A a la Z, los números del 0 al 9 y algunos caracteres especiales como «@», «_», «.» y «$». 
+          Reglas:
 
           - Si se utiliza el punto «.» éste debe colocarse como primer carácter de la etiqueta.
           - El primer carácter no puede ser un dígito.
           - No se pueden utilizar los nombres de instrucciones o registros como nombres de etiquetas.
 
-          las etiquetas son de tipo NEAR cuando el campo de etiqueta finaliza con dos puntos (:); esto es, se considera cercana: quiere esto decir que cuando realizamos una llamada sobre dicha etiqueta el ensamblador considera que está dentro del mismo segmento de código (llamadas intrasegmento) y el procesador sólo carga el puntero de instrucciones IP. Téngase en cuenta que hablamos de instrucciones; las etiquetas empleadas antes de las directivas, como las directivas de definición de datos por ejemplo, no llevan los dos puntos y sin embargo son cercanas.
+          las etiquetas son de tipo NEAR cuando el campo de etiqueta finaliza con dos puntos (:); esto es, se considera cercana: 
+          quiere esto decir que cuando realizamos una llamada sobre dicha etiqueta el ensamblador considera que está dentro del 
+          mismo segmento de código (llamadas intrasegmento) y el procesador sólo carga el puntero de instrucciones IP. Téngase en 
+          cuenta que hablamos de instrucciones; las etiquetas empleadas antes de las directivas, como las directivas de definición
+          de datos por ejemplo, no llevan los dos puntos y sin embargo son cercanas.
 
-          Las etiquetas son de tipo FAR si el campo de etiqueta no termina con los dos puntos: en estas etiquetas la instrucción a la que apunta no se encuentra en el mismo segmento de código sino en otro. Cuando es referenciada en una transferencia de control se carga el puntero de instrucciones IP y el segmento de código CS (llamadas intersegmento).
+          Las etiquetas son de tipo FAR si el campo de etiqueta no termina con los dos puntos: en estas etiquetas la instrucción 
+          a la que apunta no se encuentra en el mismo segmento de código sino en otro. Cuando es referenciada en una transferencia 
+          de control se carga el puntero de instrucciones IP y el segmento de código CS (llamadas intersegmento).
 
-          Campo de nombre. Contiene el mnemónico de las instrucciones vistas en el capítulo anterior, o bien una directiva de las que veremos más adelante.
+          Campo de nombre. Contiene el mnemónico de las instrucciones vistas en el capítulo anterior, o bien una directiva de las 
+          que veremos más adelante.
 
-          Campo de operandos. Indica cuales son los datos implicados en la operación. Puede haber 0, 1 ó 2; en el caso de que sean dos al 1º se le llama destino y al 2º -separado por una coma- fuente.
+          Campo de operandos. Indica cuales son los datos implicados en la operación. Puede haber 0, 1 ó 2; en el caso de que sean 
+          dos al 1º se le llama destino y al 2º -separado por una coma- fuente.
 
                  mov ax, es:[di]     -->     ax         destino
                                              es:[di]    origen
-          Campo de comentarios. Cuando en una línea hay un punto y coma (;) todo lo que sigue en la línea es un comentario que realiza aclaraciones sobre lo que se está haciendo en ese programa, resulta de gran utilidad de cara a realizar futuras modificaciones al mismo.
+          Campo de comentarios. Cuando en una línea hay un punto y coma (;) todo lo que sigue en la línea es un comentario que realiza 
+          aclaraciones sobre lo que se está haciendo en ese programa, resulta de gran utilidad de cara a realizar futuras modificaciones al mismo.
 
 
 5.2. - CONSTANTES Y OPERADORES.
