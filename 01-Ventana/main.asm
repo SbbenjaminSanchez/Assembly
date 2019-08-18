@@ -25,8 +25,8 @@ WinMain proto :DWORD,:DWORD,:DWORD,:DWORD
 
     ;DECLARACION DE VARIABLES CON VALOR ASIGNADO
     .DATA
-claseNombre db 'Ventana',0
-Titulo  db 'Titulo de Ventana',0
+claseNombre     db 'Ventana',0
+Titulo          db 'Titulo de Ventana',0
 
     ;DECLARACION DE VARIABLES SIN VALOR ASIGNADO AUN
     .DATA?
@@ -39,7 +39,7 @@ start:
     ;TODO AQUI!!!
     ;=====================================================
 
-    ;Funciion para pbtener la instancia que esta ejecutandose
+    ;Funcion para obtener la instancia que esta ejecutandose
     ;NULL es para que regrese la instancia que justo se esta ejecutando
     ;Tambien deposita la instancia en eax
     invoke GetModuleHandle,NULL ;Deposita la instancia en eax
