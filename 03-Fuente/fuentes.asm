@@ -24,7 +24,7 @@ WinMain proto :DWORD,:DWORD,:DWORD,:DWORD
 ;Definicion de Macro
 RGB macro red,green,blue                                    ;32 bits eax ; movimiento de los valores dentro de eax
     xor eax,eax     ;Hace eax = 0                           ;00000000   00000000    00000000    00000000
-    mov ah,blue     ;Mueve blue a la parte alta de ax       ;00000000   00000000    bbbbbbbb    00000000
+    mov ah,blue     ;Mueve blue a la parte alta de eax      ;00000000   00000000    bbbbbbbb    00000000
     shl eax,8       ;lo desplaza a la izquierda 8 bits      ;00000000   bbbbbbbb    00000000    00000000
     mov ah,green    ;Colocamos green en ah                  ;00000000   bbbbbbbb    gggggggg    00000000
     mov al,red      ;Colocamos red                          ;00000000   bbbbbbbb    gggggggg    rrrrrrrr
