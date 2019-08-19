@@ -1,11 +1,12 @@
 ;=====================================================================
-;DESARROLLADO POR BENJAMIN SANCHEZ | 15/08/2019 
+;DESARROLLADO POR BENJAMIN SANCHEZ 
 ;=====================================================================
 
 ;=====================================================================
 ;PARA COMPILAR EL PROGRAMA
 ;1)	\masm32\bin\ml /c /coff "main.asm"
 ;2)	\masm32\bin\PoLink /SUBSYSTEM:WINDOWS "main.obj"
+;2)	\masm32\bin\PoLink /SUBSYSTEM:CONSOLE "main.obj"
 
 ;====================================================================
 
@@ -33,6 +34,15 @@ includelib \masm32\lib\masm32.lib
 ;marks    DW  10 DUP (?)         ; marks       6
 ;message  DB  'The grade is:',0  ; message    26
 ;char1    DB  ?                  ; char1      40
+
+;Registro -eax- de 32 bits
+;xor eax,rax            = 00000000    00000000    00000000    00000000
+;mov ah,1               = 00000000    00000000    11111111    00000000
+;sh1 eax,8              = 00000000    11111111    00000000    00000000
+;mov ah,2               = 00000000    11111111    22222222    00000000
+;mov al,3               = 00000000    11111111    22222222    33333333
+
+;Registro
 
 
     .DATA
