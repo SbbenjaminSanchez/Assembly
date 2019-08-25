@@ -13,6 +13,7 @@
 
 
 .386
+.model flat,stdcall
 option casemap	:none	;Diferencia mayusculas de minusculas
 
 ;LIBRERIAS
@@ -49,8 +50,8 @@ includelib \masm32\lib\masm32.lib
 clase equ 'miVentana_1', 0    ;Constante
 
 titulo DB clase               ;Variable a la que le asignamos el valor de la constante -clase-
-mensaje DB 'Soy el mensaje', 0 ;Variabke
-
+mensaje DB 'Mensaje', 0 ;Variable
+numero DW 29
 
 
     .DATA?
@@ -59,10 +60,24 @@ total DB ?
 
     .CODE
 start:
+    ;EAX (AX,AH,AL) 32 bits
+    ;EBX (BX,BH,BL) 32 bits
+    ;ECX (CX,CH,CL) 32 bits
+    ;EDX (DX,DH,DL) 32 bits
+    ;EBP (BP)
+    ;ESP (SP)
+    ;ESI (SI)
     
+    mov eax,offset mensaje      ;mov origen,destino
+    
+    push eax 
+    pop eax 
+
+
+
 
        
-    invoke StdOut, addr titulo
+    invoke StdOut, addr total
     invoke ExitProcess, 0
 
 end start

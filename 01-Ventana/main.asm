@@ -108,7 +108,7 @@ start:
 
         ;Ciclo para procesar los Mensajes
         .WHILE TRUE
-            ;Ejecuta la funcion qie lee mensajes
+            ;Ejecuta la funcion que lee mensajes
             invoke GetMessage, ADDR mensaje,NULL,0,0
             .BREAK .IF (!eax)
 

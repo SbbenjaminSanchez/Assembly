@@ -364,7 +364,7 @@
 	; Aquí viene el código
 
 START: 		        ; Label que indica inicio del “main” 	
-	mov 	ax,@data	; Mueve a ds la dirección del segmento de datos
+	mov 	ax,@data	; Mueve a ax la dirección del segmento de datos
 	mov 	ds,ax		; utilizando el reg. ax como intermediario
 	…
 	mov     ah,4ch      	; DOS: termina el programa
